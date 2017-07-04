@@ -1,4 +1,4 @@
-# Initial Project Thoughts 
+# Initial Project Thoughts
 
 ##  Chat structure
 1. Student waits for tutor matching
@@ -22,6 +22,7 @@
     * By student
     * Total
     * Old Emojis used?
+    * Check out session 328627 (tutor using ":)" with high frequency)
 * Sentiment Rating
     * Sentiment arc through session (hypothesis: negative -> positive)
 * Questions asked in chat sessions?
@@ -51,8 +52,10 @@
     * signifier of tutor deeming a uncooperative student
 * Metric for short session that may not contain signal due to student incooperation
     * i.e. gap-clarification without a student response to tutor
+    * 1 or 2 student responses after session start may indicate this .
 * Student is never connected
     * Check if there is ever a 'consolidated_session_category' for this instance
+* Duplicate messages on the same timestamp appear on occasion, need to be removed.
 
 ## Questions for Yup
 
@@ -68,7 +71,7 @@
         * policies
     * Students
         * Price points (Now $69 for unlimited)
-            * is there away to tell parent paying and not parent paying
+            * is there a way to tell parent paying and not parent paying
         * trial variations
         * promotions
     * both
@@ -87,7 +90,7 @@
 
 * Do we have tutor canned responses. What are the top ones? Name exclusion?
 
-* " *" as a typo convention
+* '*' as a typo convention
 
 * old emojis ":/" ":)" vs new emojis
 
