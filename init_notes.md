@@ -1,3 +1,5 @@
+# Initial Project Thoughts 
+
 ##  Chat structure
 1. Student waits for tutor matching
 2. tutor is matched
