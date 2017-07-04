@@ -1,0 +1,43 @@
+variable, description, nulls
+session_id, unique session identifier,                           43380 non-null int64
+tutor_id  ,  unique tutor identifier (128 unique),                          40041 non-null float64
+student_id , unique student idenifier(12110 unique),                          43380 non-null int64
+timestamp , some time point before the start of messages?,                          43380 non-null object
+feedback_score, students feedback to tutor? scale?,                    33836 non-null float64
+wait_time, Not sure? ,                           43380 non-null float64
+ended_by_reason, reason for end of session,                     43353 non-null object
+session_category, 'unclaimed' == student cancelled and unsure how false is different?? ,                   43377 non-null object
+consolidated_session_category, session category without unclaimed and false,       37874 non-null object
+student_complained, boolean student complaint or no complaint/Does not disqualfy from session_category,                 43380 non-null bool
+student_complaint_clarity           43380 non-null bool
+student_complaint_speed             43380 non-null bool
+student_complaint_subject           43380 non-null bool
+student_complaint_other             43380 non-null bool
+session_tag_cheating                43380 non-null bool
+session_tag_inappropriate           43380 non-null bool
+session_tag_other_subject           43380 non-null bool
+session_tag_no_material             43380 non-null bool
+session_tag_student_left            43380 non-null bool
+session_tag_student_not_engaging    43380 non-null bool
+session_tag_used_whiteboard         43380 non-null bool
+student_rating, student's rating or tutor's? scale?,                     31476 non-null float64
+length_of_session, max session timestamp - min session timestamp,                   37525 non-null float64
+avg_tutor_response_time, Mean tutor response time in seconds,             34477 non-null float64
+max_tutor_response_time, Max tutor response time in seconds,              34477 non-null float64
+subject, Math, Physics or Chemistry (88% Math),                             43373 non-null object
+subtopic, subtopics of topics (no grouping id),                            43380 non-null object
+rubric_version, rubric version for session categorization (82% 2.2, started 8/16),                       33836 non-null object
+tutor_gender, male or female option (72% male) ,                        39352 non-null object
+user_signed_up_via_referral, boolean (25% referral),         43380 non-null bool
+student_has_payment_info, boolean (who doesn't have payment info?),            43380 non-null bool
+tutor_international_name, anglo last name?,             40041 non-null object
+tutor_fired, boolean (~2% of sessions),                         40041 non-null object
+student_bd_referral, bd? (only 4 sessions),                43380 non-null bool
+tutor_math_exam_score, % math score,               33409 non-null float64
+tutor_physics_exam_score , % physics score,             5271 non-null float64
+tutor_chemistry_exam_score , % Chemistry score,           5203 non-null float64
+tutor_last_sign_in_country, 3-digit country code of last sign-in,          39865 non-null object
+tutor_age, age float,                           39785 non-null float64
+student_platform, 'iOS'/'Android',                       43380 non-null object
+student_app_version, app version,                 43380 non-null object
+student_transactions_amount, dollars transacted to date?,         43380 non-null int64

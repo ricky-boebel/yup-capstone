@@ -37,6 +37,10 @@
 * Opening phrase analysis
     * gender (mr, ms, mrs)
     * length
+* Source of payment
+    * on trial boolean
+    * parent paying
+    * school paying
 
 
 ####  Signal Isolation
@@ -61,7 +65,8 @@
         * Rules
         * policies
     * Students
-        * Price points
+        * Price points (Now $69 for unlimited)
+            * is there away to tell parent paying and not parent paying
         * trial variations
         * promotions
     * both
@@ -91,5 +96,6 @@
 
 * Can we predict un-cooperative students.
 
+*  Does session category have to be target? If not can we focus on the engaged learner? Returning .etc
 
 #### Checkpoint 1200 msgs into file
