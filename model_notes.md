@@ -46,5 +46,7 @@ Article 2:, Jonathan Sedar part 1: http://blog.applied.ai/survival-analysis-part
 
 #### Readings to-do
 
-Dayne Batten part 2 multiple variables: http://daynebatten.com/2015/02/customer-churn-cox-regression/
-Jonathan Sedar part 2: http://blog.applied.ai/survival-analysis-part2/
+1. Dayne Batten part 2 multiple variables: http://daynebatten.com/2015/02/customer-churn-cox-regression/
+2. Jonathan Sedar part 2: http://blog.applied.ai/survival-analysis-part2/
+3. http://archimede.mat.ulaval.ca/theses/H-Cao_05.pdf
+4. https://github.com/williamtong/donor_lifetimes_non_profit
