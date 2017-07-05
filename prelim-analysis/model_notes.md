@@ -8,6 +8,11 @@ How do we best convey the value added by Yup in a analytical blog post?
 
 1. Analysis of tutor-student interaction that shows determinants of the "growth mindset" in areas specific to Yup's chat platform?
     a. Effect of emoji's on session category or student engagement.
+    b. Using a hazard function find the determinants of growth mindset overtime? Can we find a usage threshold that yields socratic students?
+        * Must find clear definition of the survival event.
+        * Who do we censor?
+            * Those students without an arbitrary minimum number of sessions to warrant a transition to gap-bridged. (This might be called truncation?)
+            *
 
 ###  Target
 
@@ -49,11 +54,20 @@ Article 2:, Jonathan Sedar part 1: http://blog.applied.ai/survival-analysis-part
     * Cox Proportional Hazards Model
         * Having computed the survival function4 for a population, the logical next step is to understand the effects of different characteristics of the individuals. In our truck example above, we might want to know whether maintenance periods are affected more or less by mileage, or by types of roads driven, or the manufacturer, model or load-capacity of truck etc.
 
-Article 3: donor_lifetimes_non_profit GitHub Project
+Article 3: donor_lifetimes_non_profit GitHub Project: https://github.com/williamtong/donor_lifetimes_non_profit
 
 * Used a hazard function to find the most influential factors in donor churn at different periods
+    * specifically the Aalen Additive model
+        * For training only those donors that have left are used and then predict on donors not yet chruned
+        * This model avoids the assumption of Proportional hazards.
+        * Bootstrapped the model 10K times (something to consider for survey study).
+    * Interpretable results that seem to be easy to explain to the public
 
+Article 4: Aalen Additive Model Thesis:http://archimede.mat.ulaval.ca/theses/H-Cao_05.pdf
 
+* Math Background on the model
+* Gives example of drug relapse program
+* Gives evaluation metric breakdown
 
 ### General
 
@@ -63,7 +77,4 @@ Mathcrunch rebrands to yup: https://www.inc.com/alex-moazed/edtech-startup-yup-i
 
 #### Readings to-do
 
-1. Dayne Batten part 2 multiple variables: http://daynebatten.com/2015/02/customer-churn-cox-regression/
-2. Jonathan Sedar part 2: http://blog.applied.ai/survival-analysis-part2/
-3. http://archimede.mat.ulaval.ca/theses/H-Cao_05.pdf
-4. https://github.com/williamtong/donor_lifetimes_non_profit
+1. Jonathan Sedar part 2: http://blog.applied.ai/survival-analysis-part2/

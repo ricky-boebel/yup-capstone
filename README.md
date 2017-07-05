@@ -24,3 +24,18 @@ Day 2 To-Dos
 4. Complete Reading to-dos and write up Notes
 5. Clean session_variables.csv
 6. Look into academic research related to language in teacher student relationship
+
+#### Day 2
+
+* Read 1500 lines of messages and added more observations to init_notes.md.
+* Drafted email to Yup
+* Read all but one of research to-dos and recorded notes in model_notes.md
+* Started creating the target variable (days to first gap-bridged)
+
+
+Day 3 To-Dos
+1. Review survey and Write out questions for David
+2. Finish first survival curve
+3. Come to meetings with what you want to get done for the rest if day
+4. Look into academic research related to language in teacher student relationship
+5. Clean session_variables.csv

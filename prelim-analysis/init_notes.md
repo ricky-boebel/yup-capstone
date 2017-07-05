@@ -30,6 +30,8 @@
     * num student ?
     * total ?
     * ratio of student and tutor ?
+* Num of days between chat sessions.
+    * Familiarity metric that will change over time
 
 ####  Internally Interpretable
 
