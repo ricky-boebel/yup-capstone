@@ -2,11 +2,12 @@
 
 ###  Problem
 
-How do we best convey the value added by Yup in a analytical blog post?
+How do we best convey the value added to student learning outcomes by Yup in a analytically-based blog post?
 
 ####  Options
 
 1. Analysis of tutor-student interaction that shows determinants of the "growth mindset" in areas specific to Yup's chat platform?
+1a. Find the determinants of the socratic learning
     a. Effect of emoji's on session category or student engagement.
     b. Using a hazard function find the determinants of growth mindset overtime? Can we find a usage threshold that yields socratic students?
         * Must find clear definition of the survival event.
@@ -16,7 +17,9 @@ How do we best convey the value added by Yup in a analytical blog post?
 
 ###  Target
 
-* Does "gap-bridged" unfairly favor students that are already proficient in the subject or area?
+* gap-bridged
+    * Does it unfairly favor students that are already proficient in the subject or area?
+    * Does it only measure tutor performance and not represent student success.
 * Are there metrics that we can look at that have a "growth mindset" and do we see a development over time using the platform?
     * Indicators of curiosity:
         * Question asking

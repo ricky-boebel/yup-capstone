@@ -33,9 +33,16 @@ Day 2 To-Dos
 * Started creating the target variable (days to first gap-bridged)
 
 
+Group questions
+1. Concerned that my primary variable favors students that already know the material?
+2. I'm interesting in measuring what determines a students transition to a growth mindset that is indicative of (gap-clarification or gap-explained) -> gap-bridged
+
 Day 3 To-Dos
-1. Review survey and Write out questions for David
-2. Finish first survival curve
-3. Come to meetings with what you want to get done for the rest if day
+1. Finish first survival curve
+2. Review survey and Write out questions for David
+3. Refine target variable (take students that have more than 5 sessions and greater than 0.8 gap-bridged)
 4. Look into academic research related to language in teacher student relationship
 5. Clean session_variables.csv
+6. Decide on a number of sessions for cut-off.
+7. Find out how many people are dropping out of gap-bridged post bridging.
+8. Average time to bridge
