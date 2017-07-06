@@ -23,6 +23,7 @@
     * Total
     * Old Emojis used?
     * Check out session 328627 (tutor using ":)" with high frequency)
+    * 
 * Sentiment Rating
     * Sentiment arc through session (hypothesis: negative -> positive)
 * Questions asked in chat sessions?
