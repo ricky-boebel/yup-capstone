@@ -46,3 +46,27 @@ Day 3 To-Dos
 6. Decide on a number of sessions for cut-off.
 7. Find out how many people are dropping out of gap-bridged post bridging.
 8. Average time to bridge
+
+
+#### Day 3
+
+* Added columns to student level data regarding variation of days to bridged
+* Added first categorical variables platform and subject
+* Started tuning target both min sessions subset and varying x-number of gap-bridged sessions needed to qualify as gap-bridged student.
+* Completed KMF with categorical variables
+* Completed Nelson Aalen estimator and plotted first hazard function
+* Completed 1st Aalen’s Additive model using subject as a categorical comparison.
+* Met with David Lang and got the following takeaways: ADD AFTER MEETING
+*
+
+Blockers
+* Concerned that subsetting is eliminating signal of some minority classes, bootstrapping from the donor lifetime study?
+* Need help interpreting the cumulative hazard function to assist in the tuning process.
+* Generally worried about high ratio of truncation and censorship and that I'm throwing away too much data.
+* How soon should I start cross validation? ORder of events looking into bootstrapping
+
+Day 4 To-dos:
+1. Analyze
+2. Add day of week and longer range seasonality/Acedemic year metrics to student data
+3. Look into academic research on socratic learning (30 mins)
+4.
