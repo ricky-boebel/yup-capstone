@@ -51,22 +51,38 @@ Day 3 To-Dos
 #### Day 3
 
 * Added columns to student level data regarding variation of days to bridged
-* Added first categorical variables platform and subject
+* Added first categorical variables platform and student_platform
 * Started tuning target both min sessions subset and varying x-number of gap-bridged sessions needed to qualify as gap-bridged student.
 * Completed KMF with categorical variables
 * Completed Nelson Aalen estimator and plotted first hazard function
-* Completed 1st Aalen’s Additive model using subject as a categorical comparison.
+* Completed 1st Aalen’s Additive model using student_platform as a categorical comparison.
 * Met with David Lang and got the following takeaways: ADD AFTER MEETING
-*
 
 Blockers
 * Concerned that subsetting is eliminating signal of some minority classes, bootstrapping from the donor lifetime study?
 * Need help interpreting the cumulative hazard function to assist in the tuning process.
 * Generally worried about high ratio of truncation and censorship and that I'm throwing away too much data.
-* How soon should I start cross validation? ORder of events looking into bootstrapping
+* How soon should I start cross validation? Order of events looking into bootstrapping?
 
 Day 4 To-dos:
-1. Analyze
+1. Analyze the distributions
 2. Add day of week and longer range seasonality/Acedemic year metrics to student data
 3. Look into academic research on socratic learning (30 mins)
-4.
+4. Basic NLP features (Why, What, Where, who, How), (# of '?')
+5. In-depth EDA and summary to Darren
+
+
+### Day 4 Summary
+
+* Completed clear summary of EDA with markdown in an ipynb
+    * Found interesting connection between gb rate and new students.
+    * Also looked at different subset ranges and generally
+
+
+Day 5 To-Dos
+1. Narrow focus to a the areas I want to focus on for my MVP. I think its more likely to come from message data as we can make inference on how that effects learning outcomes in more understandable way.
+2. Build out Language features and see if we can find linkages to gap-bridged.
+3. Write up a short draft of what I've found so far for the company
+4. MVP is a clean write up of my chosen narrative.
+
+### Day 5 Summary
