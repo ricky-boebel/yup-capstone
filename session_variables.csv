@@ -9,24 +9,24 @@ ended_by_reason, reason for end of session,                     43353 non-null o
 session_category, 'unclaimed' == student cancelled and unsure how false is different?? ,                   43377 non-null object
 consolidated_session_category, session category without unclaimed and false,       37874 non-null object
 student_complained, boolean student complaint or no complaint/Does not disqualfy from session_category,                 43380 non-null bool
-student_complaint_clarity           43380 non-null bool
-student_complaint_speed             43380 non-null bool
-student_complaint_subject           43380 non-null bool
-student_complaint_other             43380 non-null bool
-session_tag_cheating                43380 non-null bool
-session_tag_inappropriate           43380 non-null bool
-session_tag_other_subject           43380 non-null bool
-session_tag_no_material             43380 non-null bool
-session_tag_student_left            43380 non-null bool
-session_tag_student_not_engaging    43380 non-null bool
-session_tag_used_whiteboard         43380 non-null bool
+student_complaint_clarity, ,        43380 non-null bool
+student_complaint_speed     ,,        43380 non-null bool
+student_complaint_subject     ,,      43380 non-null bool
+student_complaint_other         ,,    43380 non-null bool
+session_tag_cheating              ,,  43380 non-null bool
+session_tag_inappropriate  ,,         43380 non-null bool
+session_tag_other_subject    ,,       43380 non-null bool
+session_tag_no_material        ,,     43380 non-null bool
+session_tag_student_left         ,,   43380 non-null bool
+session_tag_student_not_engaging   ,, 43380 non-null bool
+session_tag_used_whiteboard         ,,43380 non-null bool
 student_rating, student's rating or tutor's? scale?,                     31476 non-null float64
 length_of_session, max session timestamp - min session timestamp,                   37525 non-null float64
 avg_tutor_response_time, Mean tutor response time in seconds,             34477 non-null float64
 max_tutor_response_time, Max tutor response time in seconds,              34477 non-null float64
-subject, Math, Physics or Chemistry (88% Math),                             43373 non-null object
+subject, Math Physics or Chemistry (88% Math),                             43373 non-null object
 subtopic, subtopics of topics (no grouping id),                            43380 non-null object
-rubric_version, rubric version for session categorization (82% 2.2, started 8/16),                       33836 non-null object
+rubric_version, rubric version for session categorization (82% 2.2 started 8/16),                       33836 non-null object
 tutor_gender, male or female option (72% male) ,                        39352 non-null object
 user_signed_up_via_referral, boolean (25% referral),         43380 non-null bool
 student_has_payment_info, boolean (who doesn't have payment info?),            43380 non-null bool

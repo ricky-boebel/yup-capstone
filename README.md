@@ -84,5 +84,22 @@ Day 5 To-Dos
 2. Build out Language features and see if we can find linkages to gap-bridged.
 3. Write up a short draft of what I've found so far for the company
 4. MVP is a clean write up of my chosen narrative.
+5. Make data_cleaning file that exports a csv in the data folder.
+6.
 
 ### Day 5 Summary
+* NLP feature engineering
+    * word, char, question counts
+    * Looked into the start of sentence structure
+    * Also looked into a metrics capturing order of events.
+        * positive correlation found between question count and session number/gb_rate!!!
+
+
+Day 6/7 to-dos
+* Email Michael and Swizec on status update.
+    * Hold yourself to a deadline.
+    * email about missing data.
+    * thank and request meeting for next steps forward
+* Work towards better visualization and a brief text description.
+* Deep Dive into survey data
+*
