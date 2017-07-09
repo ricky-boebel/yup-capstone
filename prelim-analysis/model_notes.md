@@ -72,6 +72,16 @@ Article 4: Aalen Additive Model Thesis:http://archimede.mat.ulaval.ca/theses/H-C
 * Gives example of drug relapse program
 * Gives evaluation metric breakdown
 
+
+Article 4: David Lang Report draft
+
+* Looked at images shared
+    * Do students participate more in other ways
+    * Are students happier with the product when they participate
+* Passage on W-H words:
+    * WH-words (who, what, where, when, why, & how) as they are often indicators of questions even in the absence of punctuation, and formal speech, particularly when these words occur in the first part of a message[45]. Moreover, pedagogical literature provides a great deal of focus on utilization of these WH-words as a form of scaffolding[34] These terms also have a rough mapping into low (who, what, where, when) and high level (how,why) of Bloom’s taxonomy. One notable finding is that the encouragement group was less likely use these lower level terms to ask students questions(Table 11)10. This fact may be taken as evidence that being encouraged to use the whiteboard prompted more conversation and reduced the need for using WH-questions to encourage students to participate. Theses findings were qualitatively similar for both the full sample (-0.19 deviations) and male only subgroups (-0.23 deviations). We found no evidence that the proportion of questions changed as a result of this encouragement.
+* 
+
 ### General
 
 Mathcrunch rebrands to yup: https://www.inc.com/alex-moazed/edtech-startup-yup-is-taking-tutoring-to-the-next-level.html

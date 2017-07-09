@@ -102,4 +102,3 @@ Day 6/7 to-dos
     * thank and request meeting for next steps forward
 * Work towards better visualization and a brief text description.
 * Deep Dive into survey data
-*
