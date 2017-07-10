@@ -124,7 +124,7 @@ Day 8 To-dos
 * Talk more about possible survival analysis
     * Could we treat each non-gap bridged session as a learning curve, under the assumption that students are tackling a concept they don't understand yet.
         * Time = sessions til gap-bridged
-        * Assumption we know yup handles just 4 subjects, so its likely students are focused on a narrow part of the ciriculum
+        * Assumption we know yup handles just 3 subjects, so its likely students are focused on a narrow part of the curriculum.
 
 Long term goals for week 2
 1. Write-up and EDA on Survey Data (~400 words)
@@ -132,4 +132,4 @@ Long term goals for week 2
     * Hazard Curve
     * Decision tree
     * Simple logistic regression
-3. 
+3.
