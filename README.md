@@ -132,4 +132,5 @@ Long term goals for week 2
     * Hazard Curve
     * Decision tree
     * Simple logistic regression
-3.
+3. Build out framwork,
+    * Students learn in phases of failing and succeeding.
