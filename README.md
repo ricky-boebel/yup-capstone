@@ -102,3 +102,34 @@ Day 6/7 to-dos
     * thank and request meeting for next steps forward
 * Work towards better visualization and a brief text description.
 * Deep Dive into survey data
+
+### Day 6
+
+break
+
+### Day 7 Summary
+
+* Blog Post draft on student question rates.
+    *
+* Looked into survey data and I have a blocker based on not having a respondent id.
+* Email out to Michael and Swizec requesting data and meeting for Tuesday
+*
+
+Day 8 To-dos
+* Tweaks needed to visualization. tick formatting
+* W-H word analysis
+    * low : high level question ratios
+    * low to high frequency
+    *
+* Talk more about possible survival analysis
+    * Could we treat each non-gap bridged session as a learning curve, under the assumption that students are tackling a concept they don't understand yet.
+        * Time = sessions til gap-bridged
+        * Assumption we know yup handles just 4 subjects, so its likely students are focused on a narrow part of the ciriculum
+
+Long term goals for week 2
+1. Write-up and EDA on Survey Data (~400 words)
+2. Try multiple models on the question of what determines gap-bridged
+    * Hazard Curve
+    * Decision tree
+    * Simple logistic regression
+3. 
