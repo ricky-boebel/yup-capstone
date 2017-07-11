@@ -133,4 +133,8 @@ Long term goals for week 2
     * Decision tree
     * Simple logistic regression
 3. Build out framwork,
-    * Students learn in phases of failing and succeeding.
+    * Read Darren's slack pdf. Make a start on the r code.
+
+
+* Average time between sessions
+* what's important?
