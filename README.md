@@ -166,6 +166,21 @@ Day 9 To-Do's
     * "almost" and other growth mindset
     * tutor based
 
+Phrases associated with growth mindset to check:
+hard work
+working hard
+You're so close
+You are so close
+Nice effort
+Good job
+You've got this
+You got this
+Keep at it
+Keep going
+Keep trying
+Almost there
+Yet
+
 * Survey Background
     * Michael to send guidence
     * Mindset shift
@@ -173,8 +188,13 @@ Day 9 To-Do's
     * dwech mindset
         * duckworth grit scale
             * Measure of percervience / growth mindset
+
+
 * Random effects models
     * Allows a relaxtion of assuptions -> that all observations are independent
     * The error between each subject is incorporated into the error term.
     * Used when the subjects we have aren't neccesarily who we are interested in just a random sapling from a population.
     * Cross between bayesian and frequentist
+    * Fixed effect is from the dependent variable of interest
+
+    * Random effect is the effect that you're are uninterested in but want to account for.

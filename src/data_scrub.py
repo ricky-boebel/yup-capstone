@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import random
+import emoji
 
 
 def data_reading(session_filename, message_filename):
@@ -13,14 +14,20 @@ def data_reading(session_filename, message_filename):
 
 def data_wrangling(ses, msg):
     ses.columns = [col.strip() for col in ses.columns]
+    #Message Level Dat
+
     #column cleaning
     msg['created_at_clean'] = pd.to_datetime(msg.created_at.astype(str).str[:-4], format='%Y-%m-%d %H:%M:%S', errors='ignore')
     msg['text_readable'] = msg.sent_from +': '+ msg.text
     ses['timestamp_clean'] = pd.to_datetime(ses.timestamp.astype(str).str[:-4], format='%Y-%m-%d %H:%M:%S', errors='ignore')
+    ses.loc[(ses.timestamp_clean >='2016-06-13 00:00:00') & (ses.timestamp_clean <= '2016-08-18 00:00:00'),'no_paywall'] = 1
+    ses.loc[(ses.timestamp_clean >='2016-03-16 00:00:00') & (ses.timestamp_clean <= '2016-04-12 00:00:00'),'no_paywall'] = 1
+    ses['no_paywall'] = ses.no_paywall.fillna(value=0)
+
     #merge two tables
     df_all = msg.merge(ses, on = 'session_id')
     #subset out rubric questions and take out all uncategorized sessions
-    subset_cols =ses.columns[:42].append(ses.columns[-1:])
+    subset_cols =ses.columns[:42].append(ses.columns[-2:])
     ses_1_42 = ses[subset_cols]
     ses_1_42 = ses_1_42[-ses_1_42.consolidated_session_category.isin(['no-msg-sent', None, 'connection-issue'])]
     ses_1_42['year-month'] = ses_1_42.timestamp_clean.astype(str).str[:7]
@@ -28,8 +35,6 @@ def data_wrangling(ses, msg):
     # New Transformations
     ses_1_42.loc[ses_1_42.consolidated_session_category == "gap-bridged", 'gb_bool'] = 1
     ses_1_42.loc[ses_1_42.consolidated_session_category != "gap-bridged", 'gb_bool'] = 0
-
-
     #Student-level data cleaning
 
     # V1 : All students
@@ -67,6 +72,7 @@ def data_wrangling(ses, msg):
                        ,'most_subject','bridged_ts_list', 'unbridged_ts_list']
 
     #clean and create new columns
+    students['counter'] = students['session_count']
     students['first_gb'] = students['first_gb'].fillna(value = pd.to_datetime('2017-06-29 00:00:00', format='%Y-%m-%d %H:%M:%S'))
     students = students.fillna(value=0) #Note this created cells where NA -> 1970 dt object in first_gb column
     students['gb_rate'] = 1.0*students.gb_count / students.session_count
@@ -138,22 +144,45 @@ def data_wrangling(ses, msg):
     full_transcript_by_session['question_count'] = question_count_list
     ses_1_42 = ses_1_42.merge(full_transcript_by_session, how = 'left', on = 'session_id')
 
-    ques_start = ['how', 'what', 'when' , 'where' , 'why', 'can']
+    ques_start = ['how', 'what', 'when' , 'where' , 'why', 'who']
     for word in ques_start:
-        _ls = [t.strip()[:len(word)].count(word) for t in msg.text_lower]
-        msg[word] = _ls
+        _ls_start = [t.strip()[:len(word)].count(word) for t in msg.text_lower]
+        _ls_any = [t.count(word) for t in msg.text_lower]
+        msg[word + '_start'] = _ls_start
+        msg[word + '_any'] = _ls_any
 
-    #merging question start counts to sessions
-    msg['question_student_count'] = np.array([t.count("?") for t in msg.text_lower])
+    def emoji_list_search(ls):
+        for item in ls:
+            if unicode(item, 'utf-8') in emoji.UNICODE_EMOJI:
+                return 1.0
+        return 0.0
+
+    lower_msg_split = [t.split() for t in msg.text_lower]
+    msg["emoji_bool"] = [emoji_list_search(ls) for ls in lower_msg_split]
+
+    msg['question_student_count'] = np.array([1 if t.count("?")>0 else 0 for t in msg.text_lower])
     msg['first_word'] = [ None if t.split()==[] else t.split()[0] for t in msg.text_lower]
-    ses_1_42 = ses_1_42.merge(pd.DataFrame(msg.groupby('session_id')[ques_start].sum()).reset_index(), how = 'left', on = 'session_id')
-    #This turns question start + "_x" into a count of all question starts and question start + "_y" into just student questions
-    ses_1_42 = ses_1_42.merge(pd.DataFrame(msg[(msg.sent_from == 'student')].groupby('session_id')[ques_start].sum()).reset_index(), how = 'left', on = 'session_id')
+
+    sum_msg_vars = ['how_start', 'what_start', 'when_start' , 'where_start' , 'why_start', 'who_start',\
+                        'how_any', 'what_any', 'when_any' , 'where_any' , 'why_any', 'who_any',\
+                       'emoji_bool']
+    ques_start_any = []
+    #merging question start counts for start of msg and anywhere in message
+    ses_1_42 = ses_1_42.merge(pd.DataFrame(msg[(msg.sent_from == 'student')].groupby('session_id')[sum_msg_vars].sum()).reset_index(), how = 'left', on = 'session_id')
     ses_1_42 = ses_1_42.merge(pd.DataFrame(msg[(msg.sent_from == 'student')].groupby('session_id')['question_student_count'].sum()).reset_index(), how = 'left', on = 'session_id')
+
+    ses_1_42['high_level'] = ses_1_42['why_any'] + ses_1_42['how_any']
+    ses_1_42['low_level'] = ses_1_42['where_any'] + ses_1_42['when_any'] + ses_1_42['what_any'] + ses_1_42['who_any']
+    ses_1_42['high_level_ratio'] = ses_1_42['high_level'] / pd.Series([1.0 if num == 0.0 else num for num in ses_1_42.low_level])
     #Note missing values found here -> #ses_1_42[(pd.isnull(ses_1_42.word_count))
     #no message data for 5K sessions
+    # here are gb with no msg data: ses_1_42[(pd.isnull(ses_1_42.word_count)) &\(ses_1_42.consolidated_session_category == 'gap-bridged')]['session_id']
     #All the sessions without missing message data
+    # some may be no stud msg, connection isuue, etc
     ses_full = ses_1_42[(pd.notnull(ses_1_42.word_count))]
+    ses_full['ses_num_order'] = ses_full.groupby('student_id').cumcount()
+    ses_full['ses_num_order'] = ses_full['ses_num_order'] + 1
+
     #This creates incompleteness here as well
     #to correct I'll filter out all student ids that appear in sessions without message data
     students_full = students[-students.student_id.isin(ses_1_42[pd.isnull(ses_1_42.word_count)]['student_id'])]
@@ -162,13 +191,14 @@ def data_wrangling(ses, msg):
     students_full = students_full.merge(pd.DataFrame(ses_full.groupby('student_id')['question_student_count'].sum()).reset_index(), how = 'left', on = 'student_id')
 
     students_full['question_student_count_ratio'] = 1.0*students_full['question_student_count'] / students_full['session_count']
-    ses_full['ses_num_order'] = ses_full.groupby('student_id').cumcount()
-
 
     return ses_1_42, ses_full, students, students_full, msg
+
 
 ses, msg = data_reading("/Users/ricky/yup-capstone/data/yup-sessions-2017-06-29.csv", "/Users/ricky/yup-capstone/data/yup-messages-2017-06-29.csv")
 ses_1_42, ses_full, students, students_full, msg = data_wrangling(ses, msg)
 
-for df in ses_1_42, ses_full, students, students_full, msg:
-    df.to_csv('/Users/ricky/yup-capstone/data/' + str(df))
+
+df_name_list = ['ses_1_42', 'ses_full', 'students', 'students_full', 'msg']
+for i, df in enumerate([ses_1_42, ses_full, students, students_full, msg]):
+    df.to_csv('/Users/ricky/yup-capstone/data/' + df_name_list[i] + ".csv")
