@@ -113,7 +113,7 @@ break
     *
 * Looked into survey data and I have a blocker based on not having a respondent id.
 * Email out to Michael and Swizec requesting data and meeting for Tuesday
-*
+
 
 Day 8 To-dos
 * Tweaks needed to visualization. tick formatting
@@ -136,5 +136,45 @@ Long term goals for week 2
     * Read Darren's slack pdf. Make a start on the r code.
 
 
+### Day 8 Summary
+
+* Read and implemented LME model in R
+* Put together my MVP for Michael
+    * https://docs.google.com/document/d/1dlKYeW81oqKKNrlHRO4FlVZ8ZvlQ757EGtA3qmgnQGk/edit
+* Cleaned Survey Data
+
+Day 9 To-Do's
+* Skim Chapter from Econometrics book.
+* Knock out EDA on survey data and put together an MVP by EOD
+* Set aside time for tomorrow to chat about LME.
+
+
+# Misc Notes
+### Darren Notes
 * Average time between sessions
-* what's important?
+
+### Michael Notes
+* Canned Responses
+    * Canned Response analysis
+        * boolean of canned responses
+        * canned vs. canned
+        * canned effect on gap bridged
+        * canned effect on session length
+        * How long have you been using canned Responses
+* Usage of "yet"
+    * OR other growth mindset trems
+    * "almost" and other growth mindset
+    * tutor based
+
+* Survey Background
+    * Michael to send guidence
+    * Mindset shift
+    * usage within Yup
+    * dwech mindset
+        * duckworth grit scale
+            * Measure of percervience / growth mindset
+* Random effects models
+    * Allows a relaxtion of assuptions -> that all observations are independent
+    * The error between each subject is incorporated into the error term.
+    * Used when the subjects we have aren't neccesarily who we are interested in just a random sapling from a population.
+    * Cross between bayesian and frequentist
