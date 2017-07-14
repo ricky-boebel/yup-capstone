@@ -149,6 +149,28 @@ Day 9 To-Do's
 * Set aside time for tomorrow to chat about LME.
 
 
+### Day 9 Summary
+* Survey analysis to no avail
+    * Put findings into a notebook but I still need to put everything into a doc for Yup and send over for them. (2 hours work)
+* Initial reading on LME
+
+Day 10 To-Dos
+* Implement LME and start tot refine model.
+* Sort out data issues related to messages
+
+### Day 10 summary
+* We do have a working model that is (only when we scale and take away outliers and scale)
+    * I think this is due to imbalanced classes
+    * not converging
+    * changed scale and some high outliers
+
+
+### Day 11 To-Dos
+* Testing assumptions
+* Look up stuff on imbalanced classes
+* Feature engineering based on Michael's requests. (gm words)
+*
+
 # Misc Notes
 ### Darren Notes
 * Average time between sessions
@@ -165,6 +187,10 @@ Day 9 To-Do's
     * OR other growth mindset trems
     * "almost" and other growth mindset
     * tutor based
+
+
+### Day 13 To-dos
+* Survey analysis write-up
 
 Phrases associated with growth mindset to check:
 hard work

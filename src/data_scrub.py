@@ -192,6 +192,29 @@ def data_wrangling(ses, msg):
 
     students_full['question_student_count_ratio'] = 1.0*students_full['question_student_count'] / students_full['session_count']
 
+    #subsetting some invalid sessions without msg data
+    ses_full = ses_full[-ses_full.question_student_count.isnull()]
+    # lower case text
+    ses_full['text'] = ses_full.text.str.lower()
+
+    #suggested growth mindset phrases
+    gm_phrase = ['hard work', 'working hard',"you're so close", 'you are so close', 'nice effort', 'good job', \
+                 "you've got this", "you got this", "keep at it", "keep going", "keep trying", "almost there", "yet"]
+
+    #individually inputting phrases
+    for i, phrase in enumerate(gm_phrase):
+        _ls_any = [1 if t.count(phrase)> 0 else 0 for t in msg.text_lower.astype(str)]
+        msg['gp_' + str(i)] = _ls_any
+
+
+    ses_full = ses_full.merge(pd.DataFrame(msg[(msg.sent_from == 'tutor')].groupby('session_id')[msg.columns[-13:]].sum()).reset_index(), how = 'left', on = 'session_id')
+
+
+    #summing across rows and than a boolean for gp preasent
+    ses_full['gp_sum'] = ses_full[ses_full.columns[-13:]].sum(axis = 1)
+    ses_full.loc[ ses_full.gp_sum > 0 , 'gp_bool']  =  1
+    ses_full.loc[ ses_full.gp_sum == 0 , 'gp_bool']  =  0
+
     return ses_1_42, ses_full, students, students_full, msg
 
 
