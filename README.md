@@ -171,6 +171,27 @@ Day 10 To-Dos
 * Feature engineering based on Michael's requests. (gm words)
 *
 
+### Day 11 Summary
+* iterated on and interpretted my logistic model
+    * two branches of the model
+        * student fixed, tutor random
+        * tutor fixed and student random
+
+
+### Day 12 To-dos
+* More features
+    * Canned Responses
+    * name variations
+* Balancing interaction with iterprability
+    * How would I interpret a variable that interacts with another
+* Which model is most viable or insightful
+
+Interpretation Blockers
+* Normality of random effects (http://idiom.ucsd.edu/~rlevy/lign251/fall2007/lecture_15.pdf) There is some evidence here that the intercepts are not normally distributed.
+This is more alarming given that the model has assumed that the intercepts
+are normally distributed, so that it is biased toward assigning BLUPs that
+adhere to a normal distribution.
+
 # Misc Notes
 ### Darren Notes
 * Average time between sessions
