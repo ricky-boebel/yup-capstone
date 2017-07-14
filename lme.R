@@ -26,19 +26,21 @@ ses_full2['question_student_count_scale'] = scale(ses_full2['question_student_co
 ses_full2['gp_sum_scale'] = scale(ses_full2['gp_sum'])
 ses_full2 = ses_full2[ses_full2$gp_sum_scale <3,]#Above 99.6th percentile
 ses_full2['tut_count_msg_scale'] = scale(ses_full2['tut_count_msg'])
-ses_full2 = ses_full2[ses_full2$tut_count_msg_scale <3,]#Above 99.6th percentile
+ses_full2 = ses_full2[ses_full2$tut_count_msg_scale <3,]
+ses_full2['stu_count_msg_scale'] = scale(ses_full2['stu_count_msg'])
+ses_full2 = ses_full2[ses_full2$stu_count_msg_scale <3,]#Above 99.6th percentile
 ses_full2['name_count_scale'] = scale(ses_full2['name_count'])
 ses_full2 = ses_full2[ses_full2$name_count_scale <3,]#Above 99.6th percentile
 
 base.model2 = glmer(gb_bool ~  (1|tutor_id) ,
-                    data=ses_full1 , family = binomial,control=glmerControl(optimizer="bobyqa"))
+                    data=ses_full2 , family = binomial,control=glmerControl(optimizer="bobyqa"))
 
-base.model3 = glmer(gb_bool ~ question_student_count_scale +
-                      (1|tutor_id) , data=ses_full1 , family = binomial, 
+base.model3 = glmer(gb_bool ~ question_student_count_scale + 
+                      (1|tutor_id) , data=ses_full2 , family = binomial, 
                     control=glmerControl(optimizer="bobyqa"))
 
-base.model4 = glmer(gb_bool ~ question_student_count_scale + gp_rate +
-                      (1|student_id) , data=ses_full1 , family = binomial, 
+base.model4 = glmer(gb_bool ~ question_student_count_scale + stu_count_msg_scale +
+                      (1|tutor_id) , data=ses_full2, family = binomial, 
                     control=glmerControl(optimizer="bobyqa"))
 
 base.model5.1 = glmer(gb_bool ~ 
@@ -61,7 +63,7 @@ base.model5.4 = glmer(gb_bool ~ gp_sum_scale + tut_count_msg_scale + name_count_
                       control=glmerControl(optimizer="bobyqa"))
 
 
-summary(base.model5.4)
+summary(base.model4)
 
 anova(base.model5.3 , base.model5.4)
 
