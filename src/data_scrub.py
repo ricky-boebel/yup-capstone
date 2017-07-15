@@ -15,7 +15,8 @@ def data_reading(session_filename, message_filename):
 def data_wrangling(ses, msg):
     ses.columns = [col.strip() for col in ses.columns]
     #Message Level Dat
-
+    msg['session_id'] = msg['session_id'].astype(str)
+    ses['session_id'] = ses['session_id'].astype(str)
     #column cleaning
     msg['created_at_clean'] = pd.to_datetime(msg.created_at.astype(str).str[:-4], format='%Y-%m-%d %H:%M:%S', errors='ignore')
     msg['text_readable'] = msg.sent_from +': '+ msg.text
@@ -215,10 +216,34 @@ def data_wrangling(ses, msg):
     ses_full.loc[ ses_full.gp_sum > 0 , 'gp_bool']  =  1
     ses_full.loc[ ses_full.gp_sum == 0 , 'gp_bool']  =  0
 
+    s_meta = pd.read_csv("data/student_user_table.csv")
+    s_meta = s_meta[['User Id', 'First Name']]
+    s_meta.columns = ['student_id' , 'first_name']
+    ses_full = ses_full.merge(s_meta, how = 'left', on = 'student_id')
+    ses_full_student = ses_full[-pd.isnull(ses_full.first_name)]
+
+    ses_full_student['first_name'] = ses_full_student.first_name.str.lower()
+    names = ses_full_student.first_name.values
+    text = ses_full_student.text.values
+    name_count = []
+    for tup in zip(names, text):
+        name_count.append(tup[1].count(tup[0]))
+
+    ses_full_student['name_count'] = name_count
+    ses_full_student['name_rate'] = ses_full_student.name_count / ses_full_student.word_count
+
+    min_ses_df = pd.DataFrame(msg.groupby('session_id')['created_at_clean'].min()).reset_index()
+    max_ses_df = pd.DataFrame(msg.groupby('session_id')['created_at_clean'].max()).reset_index()
+    df_diff = min_ses_df.merge(max_ses_df, how = 'left', on = 'session_id')
+    df_diff['created_at_clean_y']  = pd.to_datetime(df_diff['created_at_clean_y'], format='%Y-%m-%d %H:%M:%S', errors='ignore')
+    df_diff['created_at_clean_x']  = pd.to_datetime(df_diff['created_at_clean_x'], format='%Y-%m-%d %H:%M:%S', errors='ignore')
+    df_diff['ses_time_delta'] = (df_diff['created_at_clean_y'] - df_diff['created_at_clean_x']).astype('timedelta64[m]')
+    ses_full = ses_full.merge(df_diff, how = 'left', on = "session_id")
+    
     return ses_1_42, ses_full, students, students_full, msg
 
 
-ses, msg = data_reading("/Users/ricky/yup-capstone/data/yup-sessions-2017-06-29.csv", "/Users/ricky/yup-capstone/data/yup-messages-2017-06-29.csv")
+ses, msg = data_reading("/Users/ricky/yup-capstone/data/yup-sessions-2017-06-29.csv", "/Users/ricky/yup-capstone/data/yup-messages-complete.csv")
 ses_1_42, ses_full, students, students_full, msg = data_wrangling(ses, msg)
 
 

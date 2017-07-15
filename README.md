@@ -186,6 +186,21 @@ Day 10 To-Dos
     * How would I interpret a variable that interacts with another
 * Which model is most viable or insightful
 
+
+###Day 12 Summary
+
+* Presentation outline and practice
+* Model clarity and refinement
+    * medium confident that my model is not violating basic assumptiopns
+    * it looks like we have some significant factors related to gap bridged terms
+
+
+### Day 13 To-dos
+* Work on Survey in the morning and see if O can come up with anything interesting in the am.
+* Model Refinement
+    * Canned repsponses implementation
+    * Test some varying hypothesis
+
 Interpretation Blockers
 * Normality of random effects (http://idiom.ucsd.edu/~rlevy/lign251/fall2007/lecture_15.pdf) There is some evidence here that the intercepts are not normally distributed.
 This is more alarming given that the model has assumed that the intercepts
