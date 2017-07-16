@@ -201,11 +201,29 @@ Day 10 To-Dos
     * Canned repsponses implementation
     * Test some varying hypothesis
 
+
+### Day 13 Summary
+* Survey Doc almost done
+    * Still need to show my work on math stuff
+*
+
+### Day 14
+
+* canned Responses
+* Interesting insights
+    * MUST LEAD TO VALUE TO THE company
+
+    
+* Model Refinement
+    * Canned repsponses implementation
+    * Test some varying hypothesis
 Interpretation Blockers
 * Normality of random effects (http://idiom.ucsd.edu/~rlevy/lign251/fall2007/lecture_15.pdf) There is some evidence here that the intercepts are not normally distributed.
 This is more alarming given that the model has assumed that the intercepts
 are normally distributed, so that it is biased toward assigning BLUPs that
 adhere to a normal distribution.
+
+
 
 # Misc Notes
 ### Darren Notes
