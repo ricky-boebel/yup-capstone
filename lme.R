@@ -47,12 +47,13 @@ ses_full2 = ses_full2[ses_full2$name_count_scale <3,]#Above 99.6th percentile
 ses_full2$name_count0 = 0
 ses_full2$name_count0[ses_full2$name_count == 0] = 1
 ses_full2$name_count1 = 0
-ses_full2$name_count1[ses_full2$name_count == 1] = 1
+ses_full2$name_count1[ses_full2$name_count >= 1] = 1
 ses_full2$name_count2 = 0
-ses_full2$name_count2[ses_full2$name_count == 2] = 1
+ses_full2$name_count2[ses_full2$name_count >= 2] = 1
 ses_full2$name_count3 = 0
-ses_full2$name_count3[ses_full2$name_count >= 3] = 1
-
+ses_full2$name_count3[ses_full2$name_count == 3] = 1
+ses_full2$name_count3plus = 0
+ses_full2$name_count3plus[ses_full2$name_count >= 3] = 1
 
 
 base.model2 = glmer(gb_bool ~  (1|tutor_id) ,
@@ -81,7 +82,12 @@ base.model5.3 = glmer(gb_bool ~ gp_sum_scale + tut_count_msg_scale +
                       control=glmerControl(optimizer="bobyqa"))
 
 #name has some conitation to miscommunication or student inaction
-base.model5.4 = glmer(gb_bool ~ gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 + gp_2
+base.model5.4 = glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 + gp_2
+                      + tut_count_msg_scale +
+                        (1|student_id) , data=ses_full2 , family = binomial, 
+                      control=glmerControl(optimizer="bobyqa"))
+
+base.model5.6 = glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 + gp_2
                       + tut_count_msg_scale + name_count0 +
                         (1|student_id) , data=ses_full2 , family = binomial, 
                       control=glmerControl(optimizer="bobyqa"))
@@ -107,11 +113,15 @@ base.model5.5b= glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6
                         (1|student_id) , data=ses_full1 , family = binomial, 
                       control=glmerControl(optimizer="bobyqa"))
 
-base.model5.5c= glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 + gp_2
+base.model5.6 = glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 
                       + tut_count_msg_scale +
-                        (1|student_id) , data=ses_full1 , family = binomial, 
+                        (1|student_id) , data=ses_full2 , family = binomial, 
                       control=glmerControl(optimizer="bobyqa"))
 
+base.model5.8 = glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 
+                      + tut_count_msg_scale + name_count3plus +
+                        (1|student_id) , data=ses_full2 , family = binomial, 
+                      control=glmerControl(optimizer="bobyqa"))
 
 #g0 = hard work,
 #g11 = almost there
