@@ -20,11 +20,11 @@ base.model = glmer(gb_bool ~
 
 
 
-ses_full1 = ses_full[ses_full$question_student_count < 45,]#Above 99th percentile
+'''ses_full1 = ses_full[ses_full$question_student_count < 45,]#Above 99th percentile
 ses_full1[is.na(ses_full1)] <- 0
 #ses_full['question_count'] = scale(ses_full['question_count'])
 ses_full1['question_student_count_scale'] = scale(ses_full1['question_student_count'])
-ses_full1 = ses_full1[ses_full1$gp_sum_scale <3,]#Above 99.6th percentile
+ses_full1 = ses_full1[ses_full1$gp_sum_scale <3,]#Above 99.6th percentile'''
 
 ses_full1 = ses_full
 ses_full1['tut_count_msg_scale'] = scale(ses_full1['tut_count_msg'])
@@ -108,16 +108,18 @@ base.model5.5a= glmer(gb_bool ~ gp_0 + gp_11 + gp_5
                                         (1|student_id) , data=ses_full2 , family = binomial, 
                                       control=glmerControl(optimizer="bobyqa"))
 
+#MVP, no name data
 base.model5.5b= glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 
                       + tut_count_msg_scale +
                         (1|student_id) , data=ses_full1 , family = binomial, 
                       control=glmerControl(optimizer="bobyqa"))
 
+#MVP, no name data
 base.model5.6 = glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 
-                      + tut_count_msg_scale +
-                        (1|student_id) , data=ses_full2 , family = binomial, 
-                      control=glmerControl(optimizer="bobyqa"))
-
+                       + tut_count_msg_scale + crf_sum + crp_sum + crb_sum +  
+                         (1|student_id) , data=ses_full1, family = binomial, 
+                       control=glmerControl(optimizer="bobyqa"))
+#MVP with name data
 base.model5.8 = glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 
                       + tut_count_msg_scale + name_count3plus +
                         (1|student_id) , data=ses_full2 , family = binomial, 

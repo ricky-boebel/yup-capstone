@@ -216,6 +216,40 @@ def data_wrangling(ses, msg):
     ses_full.loc[ ses_full.gp_sum > 0 , 'gp_bool']  =  1
     ses_full.loc[ ses_full.gp_sum == 0 , 'gp_bool']  =  0
 
+
+    min_ses_df = pd.DataFrame(msg.groupby('session_id')['created_at_clean'].min()).reset_index()
+    max_ses_df = pd.DataFrame(msg.groupby('session_id')['created_at_clean'].max()).reset_index()
+    df_diff = min_ses_df.merge(max_ses_df, how = 'left', on = 'session_id')
+    df_diff['created_at_clean_y']  = pd.to_datetime(df_diff['created_at_clean_y'], format='%Y-%m-%d %H:%M:%S', errors='ignore')
+    df_diff['created_at_clean_x']  = pd.to_datetime(df_diff['created_at_clean_x'], format='%Y-%m-%d %H:%M:%S', errors='ignore')
+    df_diff['ses_time_delta'] = (df_diff['created_at_clean_y'] - df_diff['created_at_clean_x']).astype('timedelta64[m]')
+    ses_full = ses_full.merge(df_diff, how = 'left', on = "session_id")
+
+    # Canned Response feature engineering
+    cr = pd.read_csv("data/canned_resp.csv")
+    text_fail_lower = cr.text_fail.str.lower().unique()
+    text_probe_lower = cr.text_probe.str.lower().unique()[:-1]
+    text_begin_lower = cr.text_begin.str.lower().unique()[:-1]
+
+    for i, phrase in enumerate(text_fail_lower):
+        _ls_any = [1 if t.count(phrase)> 0 else 0 for t in msg.text_lower.astype(str)]
+        msg['crf_' + str(i)] = _ls_any
+    ses_full = ses_full.merge(pd.DataFrame(msg[(msg.sent_from == 'tutor')].groupby('session_id')[msg.columns[-len(text_fail_lower):]].sum()).reset_index(), how = 'left', on = 'session_id')
+    ses_full['crf_sum'] = ses_full[ses_full.columns[-len(text_fail_lower):]].sum(axis=1)
+
+    for i, phrase in enumerate(text_probe_lower):
+        _ls_any = [1 if t.count(phrase)> 0 else 0 for t in msg.text_lower.astype(str)]
+        msg['crp_' + str(i)] = _ls_any
+    ses_full = ses_full.merge(pd.DataFrame(msg[(msg.sent_from == 'tutor')].groupby('session_id')[msg.columns[-len(text_probe_lower):]].sum()).reset_index(), how = 'left', on = 'session_id')
+    ses_full['crp_sum'] = ses_full[ses_full.columns[-len(text_probe_lower):]].sum(axis=1)
+
+    for i, phrase in enumerate(text_begin_lower):
+        _ls_any = [1 if t.count(phrase)> 0 else 0 for t in msg.text_lower.astype(str)]
+        msg['crb_' + str(i)] = _ls_any
+    ses_full = ses_full.merge(pd.DataFrame(msg[(msg.sent_from == 'tutor')].groupby('session_id')[msg.columns[-len(text_begin_lower):]].sum()).reset_index(), how = 'left', on = 'session_id')
+    ses_full['crb_sum'] = ses_full[ses_full.columns[-len(text_begin_lower):]].sum(axis=1)
+
+    #student name count/dataframe variant
     s_meta = pd.read_csv("data/student_user_table.csv")
     s_meta = s_meta[['User Id', 'First Name']]
     s_meta.columns = ['student_id' , 'first_name']
@@ -232,14 +266,7 @@ def data_wrangling(ses, msg):
     ses_full_student['name_count'] = name_count
     ses_full_student['name_rate'] = ses_full_student.name_count / ses_full_student.word_count
 
-    min_ses_df = pd.DataFrame(msg.groupby('session_id')['created_at_clean'].min()).reset_index()
-    max_ses_df = pd.DataFrame(msg.groupby('session_id')['created_at_clean'].max()).reset_index()
-    df_diff = min_ses_df.merge(max_ses_df, how = 'left', on = 'session_id')
-    df_diff['created_at_clean_y']  = pd.to_datetime(df_diff['created_at_clean_y'], format='%Y-%m-%d %H:%M:%S', errors='ignore')
-    df_diff['created_at_clean_x']  = pd.to_datetime(df_diff['created_at_clean_x'], format='%Y-%m-%d %H:%M:%S', errors='ignore')
-    df_diff['ses_time_delta'] = (df_diff['created_at_clean_y'] - df_diff['created_at_clean_x']).astype('timedelta64[m]')
-    ses_full = ses_full.merge(df_diff, how = 'left', on = "session_id")
-    
+
     return ses_1_42, ses_full, students, students_full, msg
 
 
