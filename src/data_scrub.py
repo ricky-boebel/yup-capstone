@@ -265,8 +265,7 @@ def data_wrangling(ses, msg):
 
     ses_full_student['name_count'] = name_count
     ses_full_student['name_rate'] = ses_full_student.name_count / ses_full_student.word_count
-
-
+    
     return ses_1_42, ses_full, students, students_full, msg
 
 

@@ -108,22 +108,38 @@ base.model5.5a= glmer(gb_bool ~ gp_0 + gp_11 + gp_5
                                         (1|student_id) , data=ses_full2 , family = binomial, 
                                       control=glmerControl(optimizer="bobyqa"))
 
-#MVP, no name data
-base.model5.5b= glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 
+#MVP, gap bridged phrases,no name data
+# Key Take away: division between "almost there/keep going" negative"vand "you got this" (positive)
+phrase_model= glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 
                       + tut_count_msg_scale +
                         (1|student_id) , data=ses_full1 , family = binomial, 
                       control=glmerControl(optimizer="bobyqa"))
 
-#MVP, no name data
-base.model5.6 = glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 
-                       + tut_count_msg_scale + crf_sum + crp_sum + crb_sum +  
-                         (1|student_id) , data=ses_full1, family = binomial, 
-                       control=glmerControl(optimizer="bobyqa"))
+
+#MVP, phrase and macro, no name data
+# Key Take away: Faster access to key learning phrases does seem to make the tutor more effective. Particularly
+# macros centered around encouragment and establishing framework to learn from.
+phrase_macro_model = glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 
+                           + tut_count_msg_scale + crf_sum + crb_sum +  
+                             (1|student_id) , data=ses_full1, family = binomial, 
+                           control=glmerControl(optimizer="bobyqa"))
+
 #MVP with name data
-base.model5.8 = glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 
+# saying a students name greater than or equal to 3 times has a detremnetal effect on learning outcomes
+# I suspect this is a signal of miscommunication
+name_phrase_model = glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 
                       + tut_count_msg_scale + name_count3plus +
                         (1|student_id) , data=ses_full2 , family = binomial, 
                       control=glmerControl(optimizer="bobyqa"))
+
+
+#MVP for predicting the effect of macros on session length
+ses_length_model = lmer(ses_time_delta ~ crf_sum + crp_sum + crb_sum + 
+                      (1|student_id) , data=ses_full1)
+
+#MVP Student Rating
+student_rating_model = lmer(student_rating ~ gb_bool + tut_count_msg_scale + crf_sum + 
+                          (1|student_id) , data=ses_full1)
 
 #g0 = hard work,
 #g11 = almost there
@@ -133,13 +149,13 @@ base.model5.8 = glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6
 #histogram of random effects
 hist(ranef(base.model5.4)$student_id[,1])
 # 95% confidence intervals
-confint(base.model5.4)
+confint(ses_length_model)
 
 #summary with coefficents
 summary(base.model5.5b)
 
 #compare each model's reletive fit with anova
-anova( base.model5.5c, base.model5.5b)
+anova(base.model5.5c, base.model5.5b)
 
 mean(ses_full2$gp_sum)
 sd(ses_full2$gp_sum)
