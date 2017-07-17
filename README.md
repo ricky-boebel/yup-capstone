@@ -205,15 +205,29 @@ Day 10 To-Dos
 ### Day 13 Summary
 * Survey Doc almost done
     * Still need to show my work on math stuff
-*
+* Model Refinement and summarize conclusions from models
 
-### Day 14
+### Day 14 To-Dos
 
 * canned Responses
 * Interesting insights
     * MUST LEAD TO VALUE TO THE company
+* Model Refinement and summarize conclusions from models
 
-    
+### Day 14 Summary
+
+* Model conclusions without beta coefficient interoperability
+
+### Day 15 To-dos
+* Imbalanced class check
+* Finish Write-up for Michael
+* Add Seconds to macro sess length model
+* beta coefficient interoperability
+* presentation slide deck
+
+
+
+
 * Model Refinement
     * Canned repsponses implementation
     * Test some varying hypothesis

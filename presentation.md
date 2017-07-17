@@ -40,6 +40,7 @@
         * Student determinants of student learning are:
             * ??
 * Future work
+    * bootstrappin' ->  https://www.r-bloggers.com/generating-anova-like-table-from-glmm-using-parametric-bootstrap/
     * More sentiment analysis (issues with math stop words)
     * depth of conversation measures (something David mentioned)
     * topic analysis of messages
