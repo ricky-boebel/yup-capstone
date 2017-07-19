@@ -198,6 +198,13 @@ def data_wrangling(ses, msg):
     # lower case text
     ses_full['text'] = ses_full.text.str.lower()
 
+    #message ts at 80 percentile to add to merge
+    msg['created_at_clean']  = pd.to_datetime(msg['created_at_clean'], format='%Y-%m-%d %H:%M:%S').astype('int64')
+    eighty_ses_df = pd.DataFrame(msg.groupby('session_id')['created_at_clean'].quantile([0.8]).astype('datetime64[ns]')).reset_index()[['session_id','created_at_clean']]
+    eighty_ses_df.columns = ['session_id', 'eighty_perc_ts']
+    msg['created_at_clean']  = pd.to_datetime(msg['created_at_clean'], format='%Y-%m-%d %H:%M:%S')
+    msg = msg.merge(eighty_ses_df, how = 'left', on = 'session_id')
+
     #suggested growth mindset phrases
     gm_phrase = ['hard work', 'working hard',"you're so close", 'you are so close', 'nice effort', 'good job', \
                  "you've got this", "you got this", "keep at it", "keep going", "keep trying", "almost there", "yet"]
@@ -208,7 +215,7 @@ def data_wrangling(ses, msg):
         msg['gp_' + str(i)] = _ls_any
 
 
-    ses_full = ses_full.merge(pd.DataFrame(msg[(msg.sent_from == 'tutor')].groupby('session_id')[msg.columns[-13:]].sum()).reset_index(), how = 'left', on = 'session_id')
+    ses_full = ses_full.merge(pd.DataFrame(msg[(msg.sent_from == 'tutor') & (msg['created_at_clean'] < msg['eighty_perc_ts'])].groupby('session_id')[msg.columns[-13:]].sum()).reset_index(), how = 'left', on = 'session_id')
 
 
     #summing across rows and than a boolean for gp preasent
@@ -265,7 +272,7 @@ def data_wrangling(ses, msg):
 
     ses_full_student['name_count'] = name_count
     ses_full_student['name_rate'] = ses_full_student.name_count / ses_full_student.word_count
-    
+
     return ses_1_42, ses_full, students, students_full, msg
 
 

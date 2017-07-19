@@ -32,10 +32,14 @@ ses_full1['question_student_count_scale'] = scale(ses_full1['question_student_co
 ses_full1 = ses_full1[ses_full1$gp_sum_scale <3,]#Above 99.6th percentile'''
 
 ses_full1 = ses_full
+ses_full1['tutor_question_count'] = ses_full1['question_count'] - ses_full1['question_student_count']
+ses_full1['tutor_question_count_scale'] = scale(ses_full1['tutor_question_count'])
+
 ses_full1['tut_count_msg_scale'] = scale(ses_full1['tut_count_msg'])
 ses_full1 = ses_full1[ses_full1$tut_count_msg_scale <4,]
 ses_full1['gp_6'] = ses_full1['gp_6']  + ses_full1['gp_7'] 
 ses_full1['ses_num_order_scale'] = scale(ses_full1['ses_num_order'])
+ses_full1[is.na(ses_full1)] <- 0
 
 
 ses_full2 = ses_full_student#[ses_full_student$question_student_count < 45,]#Above 99th percentile
@@ -127,7 +131,7 @@ phrase_model= glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6
 # Key Take away: Faster access to key learning phrases does seem to make the tutor more effective. Particularly
 # macros centered around encouragment and establishing framework to learn from.
 phrase_macro_model = glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 
-                           + tut_count_msg_scale + crf_sum + crb_sum +  
+                           + tut_count_msg_scale + crf_sum + crb_sum + subject +  
                              (1|student_id) , data=ses_full1, family = binomial, 
                            control=glmerControl(optimizer="bobyqa"))
 
@@ -136,19 +140,33 @@ phrase_macro_modelb = glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6
                               (1|student_id) , data=ses_full1, family = binomial, 
                             control=glmerControl(optimizer="bobyqa"), weights = rep(10,36096))
 
+
 # Looking at each students effect as a function of their session number
 phrase_macro_modelc = glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 
                             + tut_count_msg_scale + crf_sum + crb_sum +  
                               (1+ ses_num_order_scale|student_id) , data=ses_full1, family = binomial, 
                             control=glmerControl(optimizer="bobyqa"))
 
+phrase_macro_modeld = glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 
+                            + tut_count_msg_scale + crf_sum + crb_sum +  tutor_question_count +
+                              (1+ ses_num_order_scale|student_id) , data=ses_full1, family = binomial, 
+                            control=glmerControl(optimizer="bobyqa"))
+
+phrase_macro_modele = glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 
+                           + tut_count_msg_scale + crf_sum + crb_sum + subject +  
+                             (1|student_id) , data=ses_full1, family = binomial, 
+                           control=glmerControl(optimizer="bobyqa"))
 #MVP with name data
 # saying a students name greater than or equal to 3 times has a detremnetal effect on learning outcomes
 # I suspect this is a signal of miscommunication
 name_phrase_model = glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 
-                      + tut_count_msg_scale + name_count3plus +
+                      + tut_count_msg_scale + subject + name_count3plus +
                         (1|student_id) , data=ses_full2 , family = binomial, 
                       control=glmerControl(optimizer="bobyqa"))
+
+name_phrase_modelb = glmer(gb_bool ~  tut_count_msg_scale + subject + name_count3plus +
+                            (1|student_id) , data=ses_full2 , family = binomial, 
+                          control=glmerControl(optimizer="bobyqa"))
 
 
 #MVP for predicting the effect of macros on session length
@@ -158,6 +176,18 @@ ses_length_model = lmer(ses_time_delta ~ crf_sum + crp_sum + crb_sum +
 #MVP Student Rating
 student_rating_model = lmer(student_rating ~ gb_bool + tut_count_msg_scale + crf_sum + 
                           (1|student_id) , data=ses_full1)
+
+
+#presentation model
+p_model_base = glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 
+                + tut_count_msg_scale + subject + 
+                  (1|student_id) , data=ses_full1, family = binomial, 
+                control=glmerControl(optimizer="bobyqa"))
+
+p_model = glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 
+                            + tut_count_msg_scale +  tutor_question_count_scale + subject + 
+                              (1|student_id) , data=ses_full1, family = binomial, 
+                            control=glmerControl(optimizer="bobyqa"))
 
 #g0 = hard work,
 #g11 = almost there
@@ -177,6 +207,19 @@ anova(base.model5.5c, base.model5.5b)
 
 mean(ses_full2$gp_sum)
 sd(ses_full2$gp_sum)
+
+simple_roc <- function(labels, scores){
+  labels <- labels[order(scores, decreasing=TRUE)]
+  data.frame(TPR=cumsum(labels)/sum(labels), FPR=cumsum(!labels)/sum(!labels), labels)
+}
+
+
+# Using plogis
+hard_work_delta = hard_work_delta = plogis(fixef(p_model_base)[1]+ 1.31512069 + fixef(p_model_base)[8]) - plogis(fixef(p_model_base)[1] + fixef(p_model_base)[8])
+almost_there_delta = plogis(0.02099149-0.12909176 + 0.19717091) - plogis(0.02099149 + 0.19717091)
+good_job_delta = plogis(0.02099149+ 0.56303687 + 0.19717091) - plogis(0.02099149 + 0.19717091)
+keep_going_delta = plogis(0.02099149 - 0.68513710 + 0.19717091) - plogis(0.02099149 + 0.19717091)
+math_delta = plogis(0.02099149   + 0.19717091) - plogis(0.02099149)
 
 #Log odds e(formula with a one unit increase in fixed effect) / e(formula holding all constant and fixed effects to their zero equivilent)
 # https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/
