@@ -41,6 +41,25 @@ ses_full1['gp_6'] = ses_full1['gp_6']  + ses_full1['gp_7']
 ses_full1['ses_num_order_scale'] = scale(ses_full1['ses_num_order'])
 ses_full1[is.na(ses_full1)] <- 0
 
+ses_full3 = ses_full1[ses_full1$gb_bool == 1,]
+ses_full3['gp_2'] = ses_full3['gp_2']  + ses_full3['gp_3'] 
+ses_full3$gp_12[ses_full3$gp_12 > 0] = 1
+ses_full3$gp_2[ses_full3$gp_2 > 0] = 1
+ses_full3$gp_5[ses_full3$gp_5 > 0] = 1
+ses_full3['gp_10'] = ses_full3['gp_10']  + ses_full3['gp_11'] 
+ses_full3$gp_10[ses_full3$gp_10> 0] = 1
+ses_full3$gp_11[ses_full3$gp_11 > 0] = 1
+
+
+
+
+ses_full3['ses_time_delta_scale'] = scale(ses_full3['ses_time_delta'])
+
+
+
+
+
+
 
 ses_full2 = ses_full_student#[ses_full_student$question_student_count < 45,]#Above 99th percentile
 ses_full2[is.na(ses_full2)] <- 0
@@ -65,6 +84,8 @@ ses_full2$name_count3 = 0
 ses_full2$name_count3[ses_full2$name_count == 3] = 1
 ses_full2$name_count3plus = 0
 ses_full2$name_count3plus[ses_full2$name_count >= 3] = 1
+
+
 
 
 base.model2 = glmer(gb_bool ~  (1|tutor_id) ,
@@ -171,23 +192,64 @@ name_phrase_modelb = glmer(gb_bool ~  tut_count_msg_scale + subject + name_count
 
 #MVP for predicting the effect of macros on session length
 ses_length_model = lmer(ses_time_delta ~ crf_sum + crp_sum + crb_sum + 
-                      (1|student_id) , data=ses_full1)
+                      (1|student_id) + (1|tutor_id) , data=ses_full1)
 
 #MVP Student Rating
 student_rating_model = lmer(student_rating ~ gb_bool + tut_count_msg_scale + crf_sum + 
                           (1|student_id) , data=ses_full1)
 
 
-#presentation model
-p_model_base = glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 
-                + tut_count_msg_scale + subject + 
+#presentation model   
+p_model_base = glmer(gb_bool ~  tut_count_msg_scale + subject + + crp_sum + crb_sum + 
                   (1|student_id) , data=ses_full1, family = binomial, 
                 control=glmerControl(optimizer="bobyqa"))
 
 p_model = glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6 
-                            + tut_count_msg_scale +  tutor_question_count_scale + subject + 
+                            + tut_count_msg_scale +  tutor_question_count_scale + subject +
                               (1|student_id) , data=ses_full1, family = binomial, 
                             control=glmerControl(optimizer="bobyqa"))
+
+
+hail_mary = glmer(student_complained ~  ses_time_delta_scale + gp_5 + gp_11 + gp_12  + crp_sum + #crb_sum + 
+                    (1|student_id) , data=ses_full3, family = binomial, 
+                  control=glmerControl(optimizer="bobyqa"))
+
+
+hail_mary2 = glmer(student_complained ~  ses_time_delta_scale + gp_5 + gp_11 + gp_12  +crf_sum + crp_sum + crb_sum + 
+                     (1|student_id) , data=ses_full3, family = binomial, 
+                   control=glmerControl(optimizer="bobyqa"))
+
+
+
+
+
+summary(hail_mary2)
+
+anova(hail_mary, hail_mary2)
+
+#Next steps
+# Test new g_0 with new features
+# Figure out a narative around name, session length and student rating
+# student rating has the best linkages to customers/ bizness case
+#if not try to switch to a student rating analysis.
+
+
+
+
+
+"hard work
+working hard
+You're so close (combined 3 with below word)
+You are so close
+Nice effort
+Good job
+You've got this
+You got this
+Keep at it
+Keep going
+Keep trying
+Almost there
+Yet"
 
 #g0 = hard work,
 #g11 = almost there
@@ -197,7 +259,7 @@ p_model = glmer(gb_bool ~ gp_0 + gp_11 + gp_5 + gp_9 + gp_6
 #histogram of random effects
 hist(ranef(base.model5.4)$student_id[,1])
 # 95% confidence intervals
-confint(ses_length_model)
+confint(hail_mary2)
 
 #summary with coefficents
 summary(base.model5.5b)
@@ -228,16 +290,3 @@ math_delta = plogis(0.02099149   + 0.19717091) - plogis(0.02099149)
 
 
 
-"hard work
-working hard
-You're so close
-You are so close
-Nice effort
-Good job
-You've got this
-You got this
-Keep at it
-Keep going
-Keep trying
-Almost there
-Yet"
