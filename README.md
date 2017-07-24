@@ -28,4 +28,6 @@ Feature engineering was largely dictated by creating groupings that Yup's custom
 * Length of the session
 * Total Messages (student/tutor/total)
 
-## Exploratory Data Analysis 
+## Exploratory Data Analysis
+
+One issue with the data was dealing with students that had different levels of usage. As the majority of students had less than 3 sessions I looked first at indicators of student success on the first session:
