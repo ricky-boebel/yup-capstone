@@ -32,7 +32,7 @@ Feature engineering was largely dictated by creating groupings that Yup's custom
 
 Firstly I wanted to see what relationship my success metrics had to each other. I found an interesting relationship between student success and student satisfaction.
 
-![Complaints by Student Success](https://github.com/ricky-boebel/yup-capstone/blob/master/images/complaint_rates.png)
+<p align="center"><img src="https://github.com/ricky-boebel/yup-capstone/blob/master/images/complaint_rates.png"></p>
 
 Students that solved the homework problem themselves had similar satisfaction rates to those students that failed to find the solution (1.8% difference). One would expect successful students to be less likely to complain. This shows a conflict between teaching techniques and the student's needs.
 
@@ -45,14 +45,15 @@ To differentiate between student based effects and tutor based effects I used a 
 
 I focused on the effect of the tutor using any of the growth mindset phrases on student satisfaction, because these are variables that are customer base would be most compelling to educators and parents. I used a likelihood ratio test to find features that were significantly correlated with a change in student satisfaction rates. I found that the following features features had a significant effect on student satisfaction.
 
-![Phrase Model LME](https://github.com/ricky-boebel/yup-capstone/blob/master/images/phrase_model_results.png)
-
+<p align="center"><img src="https://github.com/ricky-boebel/yup-capstone/blob/master/images/phrase_model_results.png"></p>
 
 ## Interpretation of Effects
 
-Duration of session (Positive effect): This is intuitive as students will be more likely to complain if they are not finding the solution quickly.
-"Good job" (Positive effect): This result suggests that the phrase "good job" positively impacts the students satisfaction. Other phrases with a positive sentiment showed no effect, such as "nice effort" and "hard work". This result suggests that using the phrase "good job" is more likely to result in a satisfactory student experience than other phrases that could be used in the same context.
-"Almost there" and "Yet" (Negative effect): This result refutes popular educational theory that "almost there" and "yet" encourages student percerverience and leads to improved learning outcomes. While these terms do appear in successful sessions, this result contends that students may be discouraged when tutor's use these phrases and be therefore have less sustainable learning experiences.
+D**uration of session (Positive effect):** This is intuitive as students will be more likely to complain if they are not finding the solution quickly.
+
+**"Good job" (Positive effect):** This result suggests that the phrase "good job" positively impacts the students satisfaction. Other phrases with a positive sentiment showed no effect, such as "nice effort" and "hard work". This result suggests that using the phrase "good job" is more likely to result in a satisfactory student experience than other phrases that could be used in the same context.
+
+**"Almost there" and "Yet" (Negative effect):** This result refutes popular educational theory that "almost there" and "yet" encourages student percerverience and leads to improved learning outcomes. While these terms do appear in successful sessions, this result contends that students may be discouraged when tutor's use these phrases and be therefore have less sustainable learning experiences.
 
 ## Value added for Yup
 
