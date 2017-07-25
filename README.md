@@ -45,7 +45,7 @@ To differentiate between student based effects and tutor based effects I used a 
 
 I focused on the effect of the tutor using any of the growth mindset phrases on student satisfaction, because these are variables that are customer base would be most compelling to educators and parents. I used a likelihood ratio test to find features that were significantly correlated with a change in student satisfaction rates. I found that the following features features had a significant effect on student satisfaction.
 
-![Phrase Model LME](https://github.com/ricky-boebel/yup-capstone/blob/master/images/phrase_model_results.png)
+![Phrase Model LME](https://github.com/ricky-boebel/yup-capstone/blob/master/images/phrase_model_results.png =250x)
 
 
 ## Interpretation of Effects
