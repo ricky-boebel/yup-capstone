@@ -30,4 +30,25 @@ Feature engineering was largely dictated by creating groupings that Yup's custom
 
 ## Exploratory Data Analysis
 
+Firstly I wanted to see what relationship my success metrics had to each other. I found an interesting relationship between student success and student satisfaction.
+
+![Complaints by Student Success](https://github.com/ricky-boebel/yup-capstone/blob/master/images/complaint_rates.png)
+
+Students that solved the homework problem themselves had similar satisfaction rates to those students that failed to find the solution (1.8% difference). One would expect successful students to be less likly to complain. This shows a conflict between teaching techniques and the student's needs.
+
+
+To better refine a hypothesis I'm going to focus in on sessions where the student was successful. I am working under the assumption that  Within these successful lessons I'm going to look at what determines student satisfaction to better inform the interaction between teaching techniques that encourage persistence in the short term and the long term.
+
+
+I focused on tutor based determinants of student success, because these are variables that are customer base would be interested in as educators.
+
+
 One issue with the data was dealing with students that had different levels of usage. As the majority of students had less than 3 sessions I looked first at indicators of student success on the first session:
+
+
+![Questions / Usage](https://github.com/ricky-boebel/yup-capstone/blob/master/images/blogplot1.png)
+
+* When students participate in learning, they have successful outcomes in their session. Looking at the first 10 questions, each question asked by the student results in a 7.2% rise in success rate on that session.
+
+This Evidence of the Yup’s Pedagogy working, especially for students willing to participate.
+Informing prospective students of desired behavior before their first session.
