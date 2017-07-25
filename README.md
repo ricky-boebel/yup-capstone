@@ -22,7 +22,7 @@ Over 2.5 million messages. Content, sent from(tutor or student) and timestamps a
 ### Feature engineering
 Feature engineering was largely dictated by creating groupings that Yup's customer base would be interested in. A key focus was on creating features that relate to the idea of fostering a [growth mindset](https://en.wikipedia.org/wiki/Mindset#Fixed_and_growth), a widely accepted psychological theory that students an be placed on a continuum according to their implicit views of "where ability comes from". Other features were focused on
 * Categories defining sessions where the following growth mindset phrases appear(defined by Yup)
-    * Hard work, Working hard, You're so close, You are so close, Nice effort, You've got this, You got this, Keep at it, Keep trying, Good Job, Almost there, Yet
+    * Phrase are: Hard work, Working hard, You're so close, You are so close, Nice effort, You've got this, You got this, Keep at it, Keep trying, Good Job, Almost there, and Yet
 * Number of Questions asked (student/tutor/total)
 * Question type asked (how, what, when , where , why, who)
 * Length of the session
@@ -34,21 +34,18 @@ Firstly I wanted to see what relationship my success metrics had to each other. 
 
 ![Complaints by Student Success](https://github.com/ricky-boebel/yup-capstone/blob/master/images/complaint_rates.png)
 
-Students that solved the homework problem themselves had similar satisfaction rates to those students that failed to find the solution (1.8% difference). One would expect successful students to be less likly to complain. This shows a conflict between teaching techniques and the student's needs.
+Students that solved the homework problem themselves had similar satisfaction rates to those students that failed to find the solution (1.8% difference). One would expect successful students to be less likely to complain. This shows a conflict between teaching techniques and the student's needs.
 
 
-To better refine a hypothesis I'm going to focus in on sessions where the student was successful. I am working under the assumption that  Within these successful lessons I'm going to look at what determines student satisfaction to better inform the interaction between teaching techniques that encourage persistence in the short term and the long term.
+To better refine a hypothesis I'm going to focus in on successful sessions (solution found by student). Within these successful lessons, I'm going to look at what determines student satisfaction to better inform what teaching language encourage growth in the short term but leaves the student unsatisfied in the long term.
 
+##Mixed Effects Logistic Regression
 
-I focused on tutor based determinants of student success, because these are variables that are customer base would be interested in as educators.
+To differentiate between student based effects and tutor based effects I used a mixed effects Logistic Regression. This model acknowledges that there is dependencies between tutoring sessions that are created by students completing multiple sessions. Accounting for these dependencies controls for noise that originates from each student having a different likelihood of satisfaction.
 
+I focused on the effect of the tutor using any of the growth mindset phrases on student satisfaction, because these are variables that are customer base would be most compelling to educators and parents. I used a likelihood ratio test to find features that were significantly correlated with a change in student satisfaction rates. I found that the following features features had a significant effect on student satisfaction.
 
-One issue with the data was dealing with students that had different levels of usage. As the majority of students had less than 3 sessions I looked first at indicators of student success on the first session:
-
-
-![Questions / Usage](https://github.com/ricky-boebel/yup-capstone/blob/master/images/blogplot1.png)
-
-* When students participate in learning, they have successful outcomes in their session. Looking at the first 10 questions, each question asked by the student results in a 7.2% rise in success rate on that session.
-
-This Evidence of the Yup’s Pedagogy working, especially for students willing to participate.
-Informing prospective students of desired behavior before their first session.
+* Session Duration
+* "Good Job"
+* "Almost there"
+* "Yet"
