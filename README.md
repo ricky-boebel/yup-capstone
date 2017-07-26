@@ -1,5 +1,5 @@
 # Texting With Socrates
-#### How language effects educational outcomes?
+#### How language affects educational outcomes?
 Ricky Boebel, July 2017
 
 ## Project Description
