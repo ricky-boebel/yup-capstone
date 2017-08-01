@@ -54,7 +54,7 @@ I focused on the effect of the tutor using any of the growth mindset phrases on 
 *Phrases showing no effect on student satisfaction: Hard work, Working hard, You're so close, You are so close, Nice effort, You've got this, You got this, Keep at it, and Keep trying
 ## Interpretation of Effects
 
-D**uration of session (Positive effect):** This is intuitive as students will be more likely to complain if they are not finding the solution quickly.
+**Duration of session (Positive effect):** This is intuitive as students will be more likely to complain if they are not finding the solution quickly.
 
 **"Good job" (Positive effect):** This result suggests that the phrase "good job" positively impacts the students satisfaction. Other phrases with a positive sentiment showed no effect, such as "nice effort" and "hard work". This result suggests that using the phrase "good job" is more likely to result in a satisfactory student experience than other phrases that could be used in the same context.
 
