@@ -50,6 +50,8 @@ I focused on the effect of the tutor using any of the growth mindset phrases on 
 
 <p align="center"><img src="https://github.com/ricky-boebel/yup-capstone/blob/master/images/phrase_model_results.png"></p>
 
+
+*Phrases showing no effect on student satisfaction: Hard work, Working hard, You're so close, You are so close, Nice effort, You've got this, You got this, Keep at it, and Keep trying
 ## Interpretation of Effects
 
 D**uration of session (Positive effect):** This is intuitive as students will be more likely to complain if they are not finding the solution quickly.
