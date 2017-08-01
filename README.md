@@ -7,6 +7,9 @@ As a data scientist looking to break into the education sector I chose to partne
 
 **What are the determinants of student success at Yup? How do we communicate these to customers(educators and parents)?**
 
+##Navigating the Repository
+Unfortunately, due to user privacy constraints I am not able to provide data related to the project. You can view my EDA, data processing and modeling files [within the "code" folder above](https://github.com/ricky-boebel/yup-capstone/tree/master/code). Note that due to package constraints some of the project used python while R was used for the mixed effects modeling.
+
 ## Data Overview
 
 ### Session level
