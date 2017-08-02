@@ -58,8 +58,8 @@ I focused on the effect of the tutor using any of the growth mindset phrases on 
 
 **"Good job" (Positive effect):** This result suggests that the phrase "good job" positively impacts the students satisfaction. Other phrases with a positive sentiment showed no effect, such as "nice effort" and "hard work". This result suggests that using the phrase "good job" is more likely to result in a satisfactory student experience than other phrases that could be used in the same context.
 
-**"Almost there" and "Yet" (Negative effect):** This result refutes popular educational theory that "almost there" and "yet" encourages students to persevere and leads to improved learning outcomes. This finding suggests that these words may encourage students to solve the problem at hand, but could also decrease the likelihood of the student feeling satisfied at the end of the session. 
+**"Almost there" and "Yet" (Negative effect):** This result refutes popular educational theory that "almost there" and "yet" encourages students to persevere and leads to improved learning outcomes. This finding suggests that these words may encourage students to solve the problem at hand, but could also decrease the likelihood of the student feeling satisfied at the end of the session.
 
-## Value added for Yup
+## Value of Analysis
 
 My results show that there is evidence in Yup's messaging data that suggests students have an adverse reaction to being introduced to growth mindset centered techniques. Externally, there is an opportunity to communicate to yup customers that there is a need for the educational community to take a more measured gradual approach to introducing growth mindset teaching techniques and language inside and outside of the classroom. Internally, I've added value by providing information on what phrases are associated with successful and sustainable learning outcomes that could inform future tutor training.
